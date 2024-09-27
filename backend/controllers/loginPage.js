@@ -1,14 +1,15 @@
+// Add this line at the top of your loginPage.js
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken'); // Import jwt
+const jwt = require('jsonwebtoken');
 
-// Login User function
 const loginUser = async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        const user = await User.findOne(username);
+        const user = await User.findOne(username); // This should work now
         console.log('User found:', user);
+        
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -19,12 +20,17 @@ const loginUser = async (req, res) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign(
+            { id: user.id, username: user.username, admin: user.admin },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
 
-        console.log("Generated Token:", token)
-        console.log("Logged in User Data:", { id: user.id, username: user.username, admin: user.admin })
-
-        res.status(200).json({ message: 'Login successful', token });
+        res.status(200).json({
+            message: 'Login successful',
+            user: { id: user.id, username: user.username, admin: user.admin },
+            token
+        });
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).json({ error: 'Server error' });
