@@ -25,17 +25,17 @@ const LoginPage = () => {
 
             const data = await response.json();
             console.log("Login successful!", data);
-            // localStorage.setItem('token', data.token);
-            navigate('/'); // Change to your desired route
+            // localStorage.setItem('token', data.token); // Uncomment this line to save the token
+            navigate('/'); // Redirect to the home page or desired route after successful login
         } catch (err) {
-            setError(err.message);
+            setError(err.message); // Set error message if login fails
         }
     };
 
     return (
         <div>
             <h1>This is the login page.</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
             <form onSubmit={handleLogin}>
                 <div>
                     <label htmlFor="username"> Username: </label>
@@ -56,13 +56,13 @@ const LoginPage = () => {
                     />
                 </div>
                 <div>
-                    <button type="submit"> Login </button>
+                    <button type="submit"> Login </button> {/* Login button */}
                 </div>
             </form>
             <div>
                 <p> Don't have an account? </p>
-                <Link to="/Register.js">
-                    <button> Register my boi </button>
+                <Link to="/Register">
+                    <button> Register my boi </button> {/* Link to Register page */}
                 </Link>
             </div>
         </div>

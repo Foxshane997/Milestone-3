@@ -12,7 +12,7 @@ function App() {
       <div>
         <Routes>  {/* Routes component should be inside Router */}
           <Route path="/" element={<LoginPage />} />
-          <Route path="/registration" element={<Register />} />
+          <Route path="/Register" element={<Register />} />
           <Route path="/songrequests" element={<SongRequests />} />
           <Route path="/adminpage" element={<AdminPage />} />
         </Routes>
