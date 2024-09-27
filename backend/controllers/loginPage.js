@@ -1,4 +1,3 @@
-// Add this line at the top of your loginPage.js
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -7,7 +6,7 @@ const loginUser = async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        const user = await User.findOne(username); // This should work now
+        const user = await User.findOne(username);
         console.log('User found:', user);
         
         if (!user) {
@@ -28,7 +27,7 @@ const loginUser = async (req, res) => {
 
         res.status(200).json({
             message: 'Login successful',
-            user: { id: user.id, username: user.username, admin: user.admin },
+            user: { id: user.id, username: user.username, admin: user.admin},
             token
         });
     } catch (error) {

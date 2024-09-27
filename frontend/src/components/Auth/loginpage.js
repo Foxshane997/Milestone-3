@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const LoginPage = () => {
-    const [username, setUsername] = useState(''); // State for username input
-    const [password, setPassword] = useState(''); // State for password input
-    const [error, setError] = useState(''); // State for error messages
-    const navigate = useNavigate(); // Hook for navigation
+const LoginPage = ({ setIsLoggedIn, setUser }) => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
-        e.preventDefault(); // Prevent default form submission
+        e.preventDefault();
 
         try {
             const response = await fetch('https://milestone-3-production.up.railway.app/api/users/login', {
@@ -16,29 +16,35 @@ const LoginPage = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password }), // Send username and password as JSON
+                body: JSON.stringify({ username, password }),
             });
 
             if (!response.ok) {
-                throw new Error('Login failed! Please check your credentials.'); // Handle unsuccessful response
+                throw new Error('Login failed! Please check your credentials.');
             }
 
-            const data = await response.json(); // Parse JSON response
+            const data = await response.json();
             console.log("Login successful!", data);
 
-            // Save the token in local storage to keep the user logged in
-            localStorage.setItem('token', data.token); // Store the JWT token
+            localStorage.setItem('token', data.token);
 
-            navigate('/'); // Redirect to the home page or desired route after successful login
+            setIsLoggedIn(true);
+            setUser({
+                id: data.user.id,
+                username: data.user.username,
+                admin: data.user.admin,
+            });
+
+            navigate('/songrequests');
         } catch (err) {
-            setError(err.message); // Set error message if login fails
+            setError(err.message);
         }
     };
 
     return (
         <div>
             <h1>This is the login page.</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleLogin}>
                 <div>
                     <label htmlFor="username"> Username: </label>
@@ -46,7 +52,7 @@ const LoginPage = () => {
                         type="text"
                         id="username"
                         value={username}
-                        onChange={(e) => setUsername(e.target.value)} // Update username state
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                 </div>
                 <div>
@@ -55,17 +61,17 @@ const LoginPage = () => {
                         type="password"
                         id="password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)} // Update password state
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
                 <div>
-                    <button type="submit"> Login </button> {/* Login button */}
+                    <button type="submit"> Login </button>
                 </div>
             </form>
             <div>
                 <p> Don't have an account? </p>
                 <Link to="/Register">
-                    <button> Register my boi </button> {/* Link to Register page */}
+                    <button> Register my boi </button>
                 </Link>
             </div>
         </div>
