@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
+// Authentication middleware to verify JWT tokens
 const auth = (req, res, next) => {
-    const token = req.header('Authorization');
+    const token = req.header('Authorization')?.split(' ')[1];
     if (!token) return res.status(401).json({ message: 'Access denied' });
 
     try {
@@ -9,6 +10,7 @@ const auth = (req, res, next) => {
         req.user = verified;
         next();
     } catch (error) {
+        // Handle invalid token
         res.status(400).json({ message: 'Invalid token' });
     }
 };

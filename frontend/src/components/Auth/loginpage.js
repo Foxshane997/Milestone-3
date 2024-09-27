@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const LoginPage = () => {
+const LoginPage = ({ setIsLoggedIn, setUser }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -25,17 +25,26 @@ const LoginPage = () => {
 
             const data = await response.json();
             console.log("Login successful!", data);
-            // localStorage.setItem('token', data.token); // Uncomment this line to save the token
-            navigate('/'); // Redirect to the home page or desired route after successful login
+
+            localStorage.setItem('token', data.token);
+
+            setIsLoggedIn(true);
+            setUser({
+                id: data.user.id,
+                username: data.user.username,
+                admin: data.user.admin,
+            });
+
+            navigate('/songrequests');
         } catch (err) {
-            setError(err.message); // Set error message if login fails
+            setError(err.message);
         }
     };
 
     return (
         <div>
             <h1>This is the login page.</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleLogin}>
                 <div>
                     <label htmlFor="username"> Username: </label>
@@ -56,13 +65,13 @@ const LoginPage = () => {
                     />
                 </div>
                 <div>
-                    <button type="submit"> Login </button> {/* Login button */}
+                    <button type="submit"> Login </button>
                 </div>
             </form>
             <div>
                 <p> Don't have an account? </p>
                 <Link to="/Register">
-                    <button> Register my boi </button> {/* Link to Register page */}
+                    <button> Register my boi </button>
                 </Link>
             </div>
         </div>
