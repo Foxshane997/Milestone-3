@@ -1,17 +1,17 @@
 const express = require('express');
+
 const { createUser, getAllUsers } = require('../controllers/userController');
-
-const { loginUser } = require('../controllers/loginPage'); // Import the login controller
-
-
+const { loginUser } = require('../controllers/loginPage');
 
 const router = express.Router();
 
-// Route to register a new user
+// Route to Register a new user
 router.post('/register', createUser); 
 
 // Route to get all users
 router.get('/', getAllUsers);
-router.post('/login', loginUser); // Use the loginUser controller for the login route
+
+// Route for logging in
+router.post('/login', loginUser);
 
 module.exports = router;
