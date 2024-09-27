@@ -9,27 +9,30 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        const username = e.target.username.value;  // Ensure you are getting these values
+        const password = e.target.password.value;
+    
         try {
-            const registerUser = await fetch(`https://milestone-3-production.up.railway.app/api/users`, {
+            const response = await fetch(`https://milestone-3-production.up.railway.app/api/users/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ username, password, admin: false }),
             });
-
-            if (registerUser.ok) {
+    
+            if (response.ok) {
                 // Navigate to login page or another route after successful registration
                 navigate('/');
             } else {
-                const errorData = await registerUser.json();
+                const errorData = await response.json();
                 setError(errorData.error || 'Registration failed');
             }
         } catch (err) {
             setError('Something went wrong. Please try again later.');
         }
     };
+    
 
     return (
         <div>
