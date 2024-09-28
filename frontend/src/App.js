@@ -32,10 +32,10 @@ function App() {
             <div>
                 <Header user={user} handleLogout={handleLogout} />
                 <Routes>
-                    <Route path="/" element={<LoginPage setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
+                    <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
                     <Route path="/Register" element={<Register />} />
-                    <Route path="/queue" element={<Queue />} />
-                    <Route path="/songrequests" element={isLoggedIn ? <SongRequests user={user} /> : <Navigate to="/" />} />
+                    <Route path="/" element={<Queue />} />
+                    <Route path="/songrequests" element={isLoggedIn ? <SongRequests user={user} /> : <Navigate to="/login" />} />
                     <Route path="/adminpage" element={isLoggedIn ? <AdminPage /> : <Navigate to="/" />} />
                 </Routes>
             </div>

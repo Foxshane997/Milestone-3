@@ -23,7 +23,7 @@ const Register = () => {
     
             if (response.ok) {
                 // Navigate to login page or another route after successful registration
-                navigate('/');
+                navigate('/login');
             } else {
                 const errorData = await response.json();
                 setError(errorData.error || 'Registration failed');

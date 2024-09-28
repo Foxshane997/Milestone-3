@@ -35,7 +35,7 @@ const LoginPage = ({ setIsLoggedIn, setUser }) => {
                 admin: data.user.admin,
             });
 
-            navigate('/songrequests');
+            navigate('/');
         } catch (err) {
             setError(err.message);
         }

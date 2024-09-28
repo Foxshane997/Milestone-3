@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ReturnToQueue = () => {
+const ReturnToSongRequests = () => {
     return (
         <div>
-            <Link to="/queue">
-                Back to the song queue
+            <Link to="/songrequests">
+                Request Song
             </Link>
         </div>
     );
 };
 
-export default ReturnToQueue;
+export default ReturnToSongRequests;
