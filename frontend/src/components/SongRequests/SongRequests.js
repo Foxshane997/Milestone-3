@@ -1,12 +1,29 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReturnToQueue from '../Misc/ReturnToQueue';
+import axios from 'axios';
+import ReturnToQueue from '../NavButtons/ReturnToQueue';
+import '../../styling/SongRequests.css';
 
 const SongRequests = ({ user }) => {
-    const [song, setSong] = useState(''); // Capture selected song
+    const [query, setQuery] = useState(''); // For searching songs
+    const [results, setResults] = useState([]); // Search results
+    const [selectedSong, setSelectedSong] = useState(''); // Selected song
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+    // Search for a song
+    const handleSearch = async () => {
+        setError(''); // Clear previous errors
+        try {
+            const response = await axios.get(`http://localhost:9000/api/songs/search`, { params: { query } });
+            setResults(response.data.tracks.items); // Adjust based on response structure
+        } catch (err) {
+            console.error('Error fetching song data:', err);
+            setError('Error fetching song data. Please try again.');
+        }
+    };
+
+    // Submit the selected song request to the backend
     const handleSongRequest = async (e) => {
         e.preventDefault(); // Prevent form submission from reloading the page
 
@@ -19,7 +36,7 @@ const SongRequests = ({ user }) => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}` // Optional: Add token to request
                 },
-                body: JSON.stringify({ username: user.username, song, requestTime: currentTime }), // Send username, song, and current time
+                body: JSON.stringify({ username: user.username, song: selectedSong, requestTime: currentTime }), // Send username, selected song, and current time
             });
 
             if (response.ok) {
@@ -37,20 +54,39 @@ const SongRequests = ({ user }) => {
         <div>
             <ReturnToQueue/>
             <h1>Song Request Page</h1>
-            <form onSubmit={handleSongRequest}>
-                <label htmlFor="song">Request a song:</label>
-                <select id="song" name="song" value={song} onChange={(e) => setSong(e.target.value)} required>
-                    <option value="">Select a song</option>
-                    <option value="song1">Song 1</option>
-                    <option value="song2">Song 2</option>
-                    <option value="song3">Song 3</option>
-                    <option value="song4">Song 4</option>
-                </select>
-                <br />
+            
+            {/* Search Functionality */}
+            <div>
+                <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search for a song"
+                />
+                <button type="button" onClick={handleSearch}>Search</button>
+            </div>
 
-                <button type="submit">Request</button>
-            </form>
+            {/* Display Search Results */}
+            {results.length > 0 && (
+                <ul>
+                    {results.map((track) => (
+                        <li key={track.id} onClick={() => setSelectedSong(track.name)}>
+                            {track.name} by {track.artists[0].name}
+                        </li>
+                    ))}
+                </ul>
+            )}
+
+            {/* Error Message */}
             {error && <p style={{ color: 'red' }}>{error}</p>}
+
+            {/* Submit Song Request */}
+            {selectedSong && (
+                <form onSubmit={handleSongRequest}>
+                    <h3>Selected Song: {selectedSong}</h3>
+                    <button type="submit">Request This Song</button>
+                </form>
+            )}
         </div>
     );
 };
