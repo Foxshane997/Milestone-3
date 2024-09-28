@@ -16,7 +16,7 @@ class Song {
 
     static async getAllSongs() {
         try {
-            const result = await db.query('SELECT * FROM song_queue ORDER BY time_submitted DESC');
+            const result = await db.query('SELECT * FROM song_queue ORDER BY time_submitted ASC');
             return result.rows;
         } catch (error) {
             throw new Error('Database Error: ' + error.message);
