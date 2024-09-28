@@ -6,6 +6,7 @@ const Header = ({ user, handleLogout }) => {
             {user ? (
                 <>
                     <p>Logged in as: {user.username}</p>
+                    {user.isAdmin && <p>You are an admin.</p>}
                     <button onClick={handleLogout}>Logout</button>
                 </>
             ) : (
