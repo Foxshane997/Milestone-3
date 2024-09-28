@@ -6,6 +6,7 @@ import Register from './components/Auth/Register';
 import SongRequests from './components/SongRequests/SongRequests';
 import AdminPage from './components/AdminPage/AdminPage';
 import Header from '../src/components/Misc/Header';
+import Queue from './components/SongRequests/queue';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -33,7 +34,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<LoginPage setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
                     <Route path="/Register" element={<Register />} />
-                    <Route path="/songrequests" element={isLoggedIn ? <SongRequests /> : <Navigate to="/" />} />
+                    <Route path="/queue" element={<Queue />} />
+                    <Route path="/songrequests" element={isLoggedIn ? <SongRequests user={user} /> : <Navigate to="/" />} />
                     <Route path="/adminpage" element={isLoggedIn ? <AdminPage /> : <Navigate to="/" />} />
                 </Routes>
             </div>
