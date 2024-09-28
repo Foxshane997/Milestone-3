@@ -6,7 +6,7 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-// Route to Register a new user
+// Route to register a new user
 router.post('/register', createUser); 
 
 // Route to get all users
