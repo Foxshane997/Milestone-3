@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use('/api/users', userRoutes);
 
 // Use song queue routes
-app.use('/api/songs', songQueueRoutes);
+app.use('/api/songQueue', songQueueRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
