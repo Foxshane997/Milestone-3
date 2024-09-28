@@ -34,7 +34,6 @@ const LoginPage = ({ setIsLoggedIn, setUser }) => {
                 username: data.user.username,
                 admin: data.user.admin,
             });
-
             navigate('/');
         } catch (err) {
             setError(err.message);
@@ -71,7 +70,7 @@ const LoginPage = ({ setIsLoggedIn, setUser }) => {
             <div>
                 <p> Don't have an account? </p>
                 <Link to="/Register">
-                    <button> Register my boi </button>
+                    <button> Register </button>
                 </Link>
             </div>
         </div>
