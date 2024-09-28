@@ -1,8 +1,8 @@
 const Song = require('../models/songQueue');
 
 const addSong = async (req, res) => {
-    console.log('Incoming request body:', req.body); // Add this line to see the incoming data
-    const { username, name } = req.body; // Accepting username and name from request body
+    console.log('Incoming request body:', req.body);
+    const { username, name } = req.body;
     try {
         const newSong = await Song.createSong({ username, name });
         res.status(201).json(newSong);

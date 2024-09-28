@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
-const songQueueRoutes = require('./routes/songQueueRoutes'); // Keep your song queue routes
-const songRoutes = require('./routes/songRoutes'); // Keep the main branch song routes
+const songQueueRoutes = require('./routes/songQueueRoutes');
+const songRoutes = require('./routes/songRoutes');
 
 require('dotenv').config();
 
@@ -23,10 +23,10 @@ app.use(bodyParser.json());
 app.use('/api/users', userRoutes);
 
 // Use song queue routes
-app.use('/api/songQueue', songQueueRoutes); // Use your route for song queue
+app.use('/api/songQueue', songQueueRoutes);
 
 // Use main branch song routes
-app.use('/api/songs', songRoutes); // Keep the main branch song routes
+app.use('/api/songs', songRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
