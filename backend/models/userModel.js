@@ -23,14 +23,14 @@ const User = {
         return result.rows;
     },
 
-    // Find a user by username (used for logging in)
+    // Find a user by username
     findOne: async (username) => {
         const query = 'SELECT * FROM users WHERE username = $1';
         const result = await db.query(query, [username]);
         if (result.rows.length > 0) {
-            return result.rows[0]; // Return the user data, which includes the password
+            return result.rows[0];
         } else {
-            return null; // Return null if no user is found
+            return null;
         }
     },
 };
