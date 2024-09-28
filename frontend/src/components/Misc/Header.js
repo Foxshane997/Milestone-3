@@ -1,17 +1,23 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({ user, handleLogout }) => {
+    const navigate = useNavigate();
+
     return (
         <header>
-            {user ? (
-                <>
-                    <p>Hello, {user.username}!</p>
-                    {user.admin && <p>You are an admin.</p>}
-                    <button onClick={handleLogout}>Logout</button>
-                </>
-            ) : (
-                <p>Please log in</p>
-            )}
+            <h1>Your App Name</h1>
+            <nav>
+                {user ? (
+                    <>
+                        <span>Welcome, {user.username}!</span>
+                        <button onClick={handleLogout}>Logout</button>
+                        {user.admin && (
+                            <button onClick={() => navigate('/admin')}>Admin</button>
+                        )}
+                    </>
+                ) : null}
+            </nav>
         </header>
     );
 };

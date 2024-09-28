@@ -24,7 +24,7 @@ const LoginPage = ({ setIsLoggedIn, setUser }) => {
             }
 
             const data = await response.json();
-            console.log("Login successful!", data);
+            console.log("Login successful!", data); // Log the data
 
             localStorage.setItem('token', data.token);
 
@@ -32,9 +32,10 @@ const LoginPage = ({ setIsLoggedIn, setUser }) => {
             setUser({
                 id: data.user.id,
                 username: data.user.username,
-                admin: data.user.admin,
+                admin: data.user.admin, // Ensure this is correct
             });
-            navigate('/');
+
+            navigate('/'); // You may want to comment this out during testing to avoid automatic redirects
         } catch (err) {
             setError(err.message);
         }
@@ -70,7 +71,7 @@ const LoginPage = ({ setIsLoggedIn, setUser }) => {
             <div>
                 <p> Don't have an account? </p>
                 <Link to="/Register">
-                    <button> Register </button>
+                    <button> Register my boi </button>
                 </Link>
             </div>
         </div>
