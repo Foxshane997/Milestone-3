@@ -15,7 +15,7 @@ const SongRequests = ({ user }) => {
     const handleSearch = async () => {
         setError(''); // Clear previous errors
         try {
-            const response = await axios.get(`http://localhost:9000/api/songs/search`, { params: { query } });
+            const response = await axios.get(`https://milestone-3-production.up.railway.app/api/songs/search`, { params: { query } });
             setResults(response.data.tracks.items); // Adjust based on response structure
         } catch (err) {
             console.error('Error fetching song data:', err);
@@ -68,9 +68,9 @@ const SongRequests = ({ user }) => {
 
             {/* Display Search Results */}
             {results.length > 0 && (
-                <ul>
+                <ul className="searchResults">
                     {results.map((track) => (
-                        <li key={track.id} onClick={() => setSelectedSong(track.name)}>
+                        <li className="searchItems" key={track.id} onClick={() => setSelectedSong(track.name)}>
                             {track.name} by {track.artists[0].name}
                         </li>
                     ))}
