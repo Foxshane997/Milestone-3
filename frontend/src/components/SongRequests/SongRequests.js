@@ -30,17 +30,17 @@ const SongRequests = ({ user }) => {
         const currentTime = new Date().toISOString(); // Get current timestamp
 
         try {
-            const response = await fetch('BACKEND_URL/api/songrequests', {
+            const response = await fetch('https://milestone-3-production.up.railway.app/api/songQueue/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}` // Optional: Add token to request
+                    // 'Authorization': `Bearer ${localStorage.getItem('token')}` // Optional: Add token to request
                 },
-                body: JSON.stringify({ username: user.username, song: selectedSong, requestTime: currentTime }), // Send username, selected song, and current time
+                body: JSON.stringify({ username: user.username, name: selectedSong, requestTime: currentTime }), // Send username, selected song, and current time
             });
 
             if (response.ok) {
-                navigate('/queue'); // Navigate to queue page after successful request
+                navigate('/'); // Navigate to queue page after successful request
             } else {
                 const errorData = await response.json();
                 setError(errorData.error || 'Request Failed');
