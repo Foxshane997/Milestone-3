@@ -32,11 +32,14 @@ function App() {
             <div>
                 <Header user={user} handleLogout={handleLogout} />
                 <Routes>
+                    {/* Public Routes */}
                     <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
                     <Route path="/Register" element={<Register />} />
                     <Route path="/" element={<Queue />} />
                     <Route path="/songrequests" element={isLoggedIn ? <SongRequests user={user} /> : <Navigate to="/login" />} />
-                    <Route path="/adminpage" element={isLoggedIn ? <AdminPage /> : <Navigate to="/" />} />
+                    
+                    {/* Protected Routes */}
+                    <Route path="/adminpage" element={isLoggedIn && user?.admin ? <AdminPage /> : <Navigate to="/" />} />
                 </Routes>
             </div>
         </Router>

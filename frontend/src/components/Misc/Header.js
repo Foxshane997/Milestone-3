@@ -5,8 +5,8 @@ const Header = ({ user, handleLogout }) => {
         <header>
             {user ? (
                 <>
-                    <p>Logged in as: {user.username}</p>
-                    {user.isAdmin && <p>You are an admin.</p>}
+                    <p>Hello, {user.username}!</p>
+                    {user.admin && <p>You are an admin.</p>}
                     <button onClick={handleLogout}>Logout</button>
                 </>
             ) : (
