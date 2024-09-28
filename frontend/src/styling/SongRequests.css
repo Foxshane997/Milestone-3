@@ -15,5 +15,15 @@ h1 {
 }
 
 .searchItems {
-    padding-bottom: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.searchItems.selected {
+    border: 5px solid white; /* White border for the selected song */
+    background-color: #c2ded7; /* Optional: add a background color */
+}
+
+.requestButton {
+    margin-bottom: 50px;
 }
