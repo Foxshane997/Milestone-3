@@ -1,0 +1,10 @@
+.queue {
+    background: #f4e4dc;
+    margin: 20px 10%;
+    list-style: none;
+    padding: 20px;
+}
+
+.queueItems {
+    padding-bottom: 10px;
+}

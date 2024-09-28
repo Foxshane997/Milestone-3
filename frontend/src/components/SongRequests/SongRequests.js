@@ -23,6 +23,14 @@ const SongRequests = ({ user }) => {
         }
     };
 
+    // Handle "Enter" key press for search
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSearch();
+        }
+    };
+
     // Submit the selected song request to the backend
     const handleSongRequest = async (e) => {
         e.preventDefault(); // Prevent form submission from reloading the page
@@ -61,6 +69,7 @@ const SongRequests = ({ user }) => {
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
+                    onKeyPress={handleKeyPress} // Handle Enter key press
                     placeholder="Search for a song"
                 />
                 <button type="button" onClick={handleSearch}>Search</button>
@@ -70,7 +79,11 @@ const SongRequests = ({ user }) => {
             {results.length > 0 && (
                 <ul className="searchResults">
                     {results.map((track) => (
-                        <li className="searchItems" key={track.id} onClick={() => setSelectedSong(track.name)}>
+                        <li
+                            className={`searchItems ${track.name === selectedSong ? 'selected' : ''}`} // Apply "selected" class to the selected song
+                            key={track.id}
+                            onClick={() => setSelectedSong(track.name)}
+                        >
                             {track.name} by {track.artists[0].name}
                         </li>
                     ))}
@@ -82,7 +95,7 @@ const SongRequests = ({ user }) => {
 
             {/* Submit Song Request */}
             {selectedSong && (
-                <form onSubmit={handleSongRequest}>
+                <form className="requestButton" onSubmit={handleSongRequest}>
                     <h3>Selected Song: {selectedSong}</h3>
                     <button type="submit">Request This Song</button>
                 </form>
