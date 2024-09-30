@@ -1,6 +1,5 @@
 const express = require('express');
-const { addSong, getAllSongs } = require('../controllers/songQueueController');
-const auth = require('../middleware/auth');
+const { addSong, getAllSongs, clearQueue } = require('../controllers/songQueueController');
 
 const router = express.Router();
 
@@ -9,5 +8,8 @@ router.post('/add', addSong);
 
 // Route to get all songs
 router.get('/', getAllSongs);
+
+// Route to clear the entire song queue
+router.delete('/clear', clearQueue);
 
 module.exports = router;

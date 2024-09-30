@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const songQueueRoutes = require('./routes/songQueueRoutes');
 const songRoutes = require('./routes/songRoutes');
+const queueRoutes = require('./routes/songQueueRoutes');
 
 require('dotenv').config();
 
@@ -27,6 +28,9 @@ app.use('/api/songQueue', songQueueRoutes);
 
 // Use main branch song routes
 app.use('/api/songs', songRoutes);
+
+// Use the new queue routes
+app.use('/api/queue', queueRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
