@@ -16,9 +16,17 @@ class Song {
 
     static async getAllSongs() {
         try {
-
             const result = await db.query('SELECT * FROM song_queue ORDER BY time_submitted ASC');
             return result.rows;
+        } catch (error) {
+            throw new Error('Database Error: ' + error.message);
+        }
+    }
+
+    // Method to clear all songs from the queue
+    static async clearAllSongs() {
+        try {
+            await db.query('DELETE FROM song_queue');
         } catch (error) {
             throw new Error('Database Error: ' + error.message);
         }
