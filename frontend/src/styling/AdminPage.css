@@ -8,11 +8,25 @@ p {
 .admin-message {
     font-size: x-large;
     font-weight: bold;
-    color: #f2baba;
 }
 
 .queue-message {
     font-style: italic;
+    font-size: large;
+    font-weight: 500;
     color: #555;
 }
 
+.go-home {
+    background-color: #79bcbf;
+    color: white;
+    border: 3px solid white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.go-home  {
+    background-color: #4fa4a1;
+}

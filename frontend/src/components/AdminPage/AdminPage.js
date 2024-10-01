@@ -29,10 +29,10 @@ const AdminPage = ({ user }) => {
         <div>
             <ToastContainer />
             <h1>This is the Admin page.</h1>
-            {user?.admin && <p className="admin-message">Welcome, Admin {user.username}!</p>}
+            {user?.admin && <p className="admin-message">Welcome, Admin {user.username}</p>}
             <p className="queue-message">You can clear the queue here.</p>
             <button onClick={clearQueue}>Clear Queue</button>
-            <button onClick={() => navigate('/')}>Go to Home</button>
+            <button className='go-home' onClick={() => navigate('/')}>Go to Home</button>
         </div>
     );
 };
