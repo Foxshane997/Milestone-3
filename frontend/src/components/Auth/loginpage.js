@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../../styling/Login.css'
 
 const LoginPage = ({ setIsLoggedIn, setUser }) => {
     const [username, setUsername] = useState('');
@@ -70,7 +71,7 @@ const LoginPage = ({ setIsLoggedIn, setUser }) => {
                     />
                 </div>
                 <div>
-                    <button type="submit"> Login </button>
+                    <button type="submit" className="login-button"> Login </button>
                 </div>
             </form>
             <div>

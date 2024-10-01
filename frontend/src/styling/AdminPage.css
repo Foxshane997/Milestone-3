@@ -1,0 +1,18 @@
+p {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.admin-message {
+    font-size: x-large;
+    font-weight: bold;
+    color: #f2baba;
+}
+
+.queue-message {
+    font-style: italic;
+    color: #555;
+}
+

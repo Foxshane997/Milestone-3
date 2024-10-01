@@ -13,8 +13,8 @@ h1 {
     margin: 20px 20%;
     list-style: none;
     padding: 20px;
-    border-radius: 8px; /* Adding rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .searchItems.selected {
@@ -29,7 +29,7 @@ h1 {
 }
 
 .searchItems:hover {
-    background-color: #f2baba; /* Pinkish hover color */
+    background-color: #f2baba;
     transition: background-color 0.3s ease;
 }
 
