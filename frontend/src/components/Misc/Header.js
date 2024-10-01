@@ -6,7 +6,7 @@ const Header = ({ user, handleLogout }) => {
 
     return (
         <header>
-            <h1>Your App Name</h1>
+            <h1>CliquePlay</h1>
             <nav>
                 {user ? (
                     <>
