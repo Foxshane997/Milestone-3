@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // For redirecting after registration
+import ReturnToQueue from '../NavButtons/ReturnToQueue';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -36,6 +37,7 @@ const Register = () => {
 
     return (
         <div>
+            <ReturnToQueue/>
             <h1>Registration Page</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username:</label>
