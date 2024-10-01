@@ -8,11 +8,15 @@ import SongRequests from './components/SongRequests/SongRequests';
 import AdminPage from './components/AdminPage/AdminPage';
 import Header from './components/Misc/Header';
 import Queue from './components/SongRequests/queue';
+import SpotifyLogin from './components/Auth/SpotifyLogin';
+import { getSpotifyToken } from './utils/auth';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+    const [spotifyToken, setSpotifyToken] = useState(null);
 
+    // Check for token in local storage for normal login
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -22,10 +26,31 @@ function App() {
         }
     }, []);
 
+    // Handle Spotify authentication and token
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+
+        if (code) {
+            getSpotifyToken(code).then((data) => {
+                setSpotifyToken(data.access_token);
+                localStorage.setItem('spotifyToken', data.access_token);
+                window.history.pushState({}, '', '/'); // Clear the URL after login
+            });
+        } else {
+            const storedSpotifyToken = localStorage.getItem('spotifyToken');
+            if (storedSpotifyToken) {
+                setSpotifyToken(storedSpotifyToken);
+            }
+        }
+    }, []);
+
     const handleLogout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('spotifyToken');
         setIsLoggedIn(false);
         setUser(null);
+        setSpotifyToken(null);
     };
 
     return (
@@ -37,7 +62,10 @@ function App() {
                     <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/" element={<Queue />} />
-                    <Route path="/songrequests" element={isLoggedIn ? <SongRequests user={user} /> : <Navigate to="/login" />} />
+                    <Route path="/spotify-login" element={<SpotifyLogin />} />
+
+                    {/* Protected Routes */}
+                    <Route path="/songrequests" element={isLoggedIn ? <SongRequests user={user} spotifyToken={spotifyToken} /> : <Navigate to="/login" />} />
                     <Route path="/admin" element={isLoggedIn && user?.admin ? <AdminPage user={user} /> : <Navigate to="/" />} />
                 </Routes>
             </div>
@@ -46,3 +74,4 @@ function App() {
 }
 
 export default App;
+
