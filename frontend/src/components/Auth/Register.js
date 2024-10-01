@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // For redirecting after registration
+import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ReturnToQueue from '../NavButtons/ReturnToQueue';
 
 const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate(); // To navigate after successful registration
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const username = e.target.username.value;  // Ensure you are getting these values
+        const username = e.target.username.value;
         const password = e.target.password.value;
-    
+
         try {
             const response = await fetch(`https://milestone-3-production.up.railway.app/api/users/register`, {
                 method: 'POST',
@@ -21,10 +23,13 @@ const Register = () => {
                 },
                 body: JSON.stringify({ username, password, admin: false }),
             });
-    
+
             if (response.ok) {
-                // Navigate to login page or another route after successful registration
-                navigate('/login');
+                toast.success('Registration successful! You can now log in.');
+
+                setTimeout(() => {
+                    navigate('/login');
+                }, 2000);
             } else {
                 const errorData = await response.json();
                 setError(errorData.error || 'Registration failed');
@@ -33,11 +38,10 @@ const Register = () => {
             setError('Something went wrong. Please try again later.');
         }
     };
-    
 
     return (
         <div>
-            <ReturnToQueue/>
+            <ReturnToQueue />
             <h1>Registration Page</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username:</label>
@@ -67,6 +71,8 @@ const Register = () => {
                 <button type="submit">Register</button>
             </form>
             {error && <p style={{ color: 'red' }}>{error}</p>}
+            {/* Toast Container */}
+            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick pauseOnHover draggable />
         </div>
     );
 };
