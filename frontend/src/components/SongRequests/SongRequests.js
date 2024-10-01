@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ReturnToQueue from '../NavButtons/ReturnToQueue';
 import '../../styling/SongRequests.css';
 
 const SongRequests = ({ user }) => {
-    const [query, setQuery] = useState(''); // For searching songs
-    const [results, setResults] = useState([]); // Search results
-    const [selectedSongId, setSelectedSongId] = useState(''); // Selected song ID
-    const [selectedSongName, setSelectedSongName] = useState(''); // Selected song name
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState([]);
+    const [selectedSongId, setSelectedSongId] = useState('');
+    const [selectedSongName, setSelectedSongName] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    // Search for a song
     const handleSearch = async () => {
-        setError(''); // Clear previous errors
+        setError('');
         try {
             const response = await axios.get(`https://milestone-3-production.up.railway.app/api/songs/search`, { params: { query } });
-            setResults(response.data.tracks.items); // Adjust based on response structure
+            setResults(response.data.tracks.items);
         } catch (err) {
             console.error('Error fetching song data:', err);
             setError('Error fetching song data. Please try again.');
         }
     };
 
-    // Handle "Enter" key press for search
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -32,11 +32,10 @@ const SongRequests = ({ user }) => {
         }
     };
 
-    // Submit the selected song request to the backend
     const handleSongRequest = async (e) => {
-        e.preventDefault(); // Prevent form submission from reloading the page
+        e.preventDefault();
 
-        const currentTime = new Date().toISOString(); // Get current timestamp
+        const currentTime = new Date().toISOString();
 
         try {
             const response = await fetch('https://milestone-3-production.up.railway.app/api/songQueue/add', {
@@ -44,11 +43,14 @@ const SongRequests = ({ user }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username: user.username, name: selectedSongName, requestTime: currentTime }), // Send username, selected song, and current time
+                body: JSON.stringify({ username: user.username, name: selectedSongName, requestTime: currentTime }),
             });
 
             if (response.ok) {
-                navigate('/'); // Navigate to queue page after successful request
+                toast.success(`"${selectedSongName}" has been added to the queue!`);
+                setTimeout(() => {
+                    navigate('/');
+                }, 3000);
             } else {
                 const errorData = await response.json();
                 setError(errorData.error || 'Request Failed');
@@ -69,7 +71,7 @@ const SongRequests = ({ user }) => {
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    onKeyPress={handleKeyPress} // Handle Enter key press
+                    onKeyPress={handleKeyPress}
                     placeholder="Search for a song"
                 />
                 <button type="button" onClick={handleSearch}>Search</button>
@@ -103,6 +105,9 @@ const SongRequests = ({ user }) => {
                     <button type="submit">Request This Song</button>
                 </form>
             )}
+            
+            {/* Toast Container */}
+            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick pauseOnHover draggable />
         </div>
     );
 };
