@@ -7,7 +7,8 @@ import '../../styling/SongRequests.css';
 const SongRequests = ({ user }) => {
     const [query, setQuery] = useState(''); // For searching songs
     const [results, setResults] = useState([]); // Search results
-    const [selectedSong, setSelectedSong] = useState(''); // Selected song
+    const [selectedSongId, setSelectedSongId] = useState(''); // Selected song ID
+    const [selectedSongName, setSelectedSongName] = useState(''); // Selected song name
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -42,9 +43,8 @@ const SongRequests = ({ user }) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    // 'Authorization': `Bearer ${localStorage.getItem('token')}` // Optional: Add token to request
                 },
-                body: JSON.stringify({ username: user.username, name: selectedSong, requestTime: currentTime }), // Send username, selected song, and current time
+                body: JSON.stringify({ username: user.username, name: selectedSongName, requestTime: currentTime }), // Send username, selected song, and current time
             });
 
             if (response.ok) {
@@ -80,9 +80,12 @@ const SongRequests = ({ user }) => {
                 <ul className="searchResults">
                     {results.map((track) => (
                         <li
-                            className={`searchItems ${track.name === selectedSong ? 'selected' : ''}`} // Apply "selected" class to the selected song
+                            className={`searchItems ${track.id === selectedSongId ? 'selected' : ''}`} 
                             key={track.id}
-                            onClick={() => setSelectedSong(track.name)}
+                            onClick={() => {
+                                setSelectedSongId(track.id);
+                                setSelectedSongName(track.name);
+                            }}
                         >
                             {track.name} by {track.artists[0].name}
                         </li>
@@ -94,9 +97,9 @@ const SongRequests = ({ user }) => {
             {error && <p style={{ color: 'red' }}>{error}</p>}
 
             {/* Submit Song Request */}
-            {selectedSong && (
+            {selectedSongName && (
                 <form className="requestButton" onSubmit={handleSongRequest}>
-                    <h3>Selected Song: {selectedSong}</h3>
+                    <h3>Selected Song: {selectedSongName}</h3>
                     <button type="submit">Request This Song</button>
                 </form>
             )}
