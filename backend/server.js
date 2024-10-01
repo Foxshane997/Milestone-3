@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 // Routes
 
 // Spotify routes
-app.use('/spotify', spotifyRoutes);
+// app.use('/spotify', spotifyRoutes);
 
 // User routes
 app.use('/api/users', userRoutes);
