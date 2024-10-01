@@ -34,18 +34,18 @@ const SongRequests = ({ user }) => {
 
     const handleSongRequest = async (e) => {
         e.preventDefault();
-
+    
         const currentTime = new Date().toISOString();
-
+    
         try {
             const response = await fetch('https://milestone-3-production.up.railway.app/api/songQueue/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username: user.username, name: selectedSongName, requestTime: currentTime }),
+                body: JSON.stringify({ username: user.username, name: selectedSongId, requestTime: currentTime }), // Send track ID instead of name
             });
-
+    
             if (response.ok) {
                 toast.success(`"${selectedSongName}" has been added to the queue!`);
                 setTimeout(() => {
@@ -59,6 +59,7 @@ const SongRequests = ({ user }) => {
             setError('Something went wrong. Please try again later.');
         }
     };
+    
 
     return (
         <div>

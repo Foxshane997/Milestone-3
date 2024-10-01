@@ -29,4 +29,15 @@ const searchSong = async (query) => {
     return response.data;
 };
 
-module.exports = { searchSong };
+const getTrackById = async (trackId) => {
+    const token = await getAccessToken(); // Fetch the access token
+    const response = await axios.get(`https://api.spotify.com/v1/tracks/${trackId}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    return response.data; // Return the track details
+};
+
+module.exports = { searchSong, getTrackById }; // Export the new function
+
