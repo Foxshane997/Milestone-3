@@ -43,7 +43,3 @@ h1 {
     font-size: 16px;
 }
 
-.requestButton:hover {
-    background-color: #f2baba;
-    transition: background-color 0.3s ease;
-}
