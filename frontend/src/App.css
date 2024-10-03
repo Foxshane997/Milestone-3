@@ -8,7 +8,7 @@ button {
   background-color: #f2baba;
   color: white;
   border: 3px solid white;
-  border-radius: 5px;
+  border-radius: 25px;
   font-size: medium;
   font-weight: 500;
   cursor: pointer;
@@ -34,17 +34,18 @@ button:hover {
 }
 
 .navButton {
-  background-color: #4CAF50; /* Green background */
-  color: white; /* White text */
-  padding: 10px 20px; /* Padding for the button */
-  border-radius: 5px; /* Rounded corners */
-  text-align: center; /* Centered text */
-  text-decoration: none; /* Remove underline */
-  font-size: 16px; /* Font size */
-  font-weight: bold; /* Bold text */
-  transition: background-color 0.3s ease; /* Smooth background color transition */
+  background-color: #79bcbf;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px; /* Increased to create pill shape */
+  border: solid 3px white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease; 
 }
 
 .navButton:hover {
-  background-color: #45a049; 
+  background-color: #4fa4a1; 
 }
