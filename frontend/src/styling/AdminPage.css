@@ -22,11 +22,11 @@ p {
     color: white;
     border: 3px solid white;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.go-home  {
+.go-home:hover  {
     background-color: #4fa4a1;
 }
