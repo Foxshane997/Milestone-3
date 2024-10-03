@@ -1,12 +1,17 @@
 body {
     text-align: center;
     background-color: #c2ded7;
+    
 }
 
 h1 {
     color: #79bcbf;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    text-shadow:         -1px -1px 0 white, 
+    1px -1px 0 white,  
+    -1px 1px 0 white,  
+    1px 1px 0 white;   
 }
+    
 
 .searchResults {
     background-color: #f4e4dc;
