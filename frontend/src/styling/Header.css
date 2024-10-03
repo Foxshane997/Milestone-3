@@ -1,0 +1,43 @@
+header {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .header-span {
+    font-style: italic;
+    font-size: large;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    margin: 7px;
+    padding: 10px 15px;
+    background-color: #f2baba;
+    color: white;
+    border: 3px solid white;
+    border-radius: 25px;
+    font-size: medium;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #b67a7a;
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+  }
+  

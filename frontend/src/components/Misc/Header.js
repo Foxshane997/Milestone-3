@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../App'
+import '../../styling/Header.css';
 
 const Header = ({ user, handleLogout }) => {
     const navigate = useNavigate();
@@ -12,10 +12,12 @@ const Header = ({ user, handleLogout }) => {
                 {user ? (
                     <>
                         <span className='header-span'>Welcome, {user.username}!</span>
-                        <button onClick={handleLogout}>Logout</button>
-                        {user.admin && (
-                            <button onClick={() => navigate('/admin')}>Admin</button>
-                        )}
+                        <div className="button-container">
+                            <button onClick={handleLogout}>Logout</button>
+                            {user.admin && (
+                                <button onClick={() => navigate('/admin')}>Admin</button>
+                            )}
+                        </div>
                     </>
                 ) : null}
             </nav>
