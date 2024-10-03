@@ -11,3 +11,30 @@
 .login-button:hover {
     background-color: #4fa4a1;
 }
+
+.input-container {
+    margin-bottom: 20px;
+}
+
+.input-label {
+    font-size: 1rem;
+    color: #b67a7a;
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+input[type="text"], input[type="password"] {
+    border-radius: 7px;
+    background-color: #ffffff;
+    font-size: 1rem;
+    color: #b67a7a;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+input:focus {
+    outline: none;
+    background-color: #faf5f5;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
