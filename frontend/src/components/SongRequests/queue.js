@@ -21,8 +21,6 @@ const Queue = () => {
 
         fetchQueue();
 
-        const intervalId = setInterval(fetchQueue, 5000);
-        return () => clearInterval(intervalId);
     }, []);
 
     // Fetch song details when the queue or songDetails changes
