@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const ReturnToSongRequests = () => {
     return (
-        <div>
-            <Link to="/songrequests">
+        <div className="navButtonContainer">
+            <Link to="/songrequests" className="navButton">
                 Request Song
             </Link>
         </div>
