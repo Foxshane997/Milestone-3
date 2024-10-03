@@ -1,17 +1,31 @@
 body {
     text-align: center;
     background-color: #c2ded7;
+    
 }
 
 h1 {
     color: #79bcbf;
+    text-shadow:         -1px -1px 0 white, 
+    1px -1px 0 white,  
+    -1px 1px 0 white,  
+    1px 1px 0 white;   
 }
+    
 
 .searchResults {
     background-color: #f4e4dc;
     margin: 20px 20%;
     list-style: none;
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.searchItems.selected {
+    border: 5px solid white;
+    background-color: #c2ded7;
+    transition: border 0.3s ease, background-color 0.3s ease;
 }
 
 .searchItems {
@@ -19,11 +33,18 @@ h1 {
     cursor: pointer;
 }
 
-.searchItems.selected {
-    border: 5px solid white; /* White border for the selected song */
-    background-color: #c2ded7; /* Optional: add a background color */
+.searchItems:hover {
+    background-color: #f2baba;
+    transition: background-color 0.3s ease;
 }
 
 .requestButton {
-    margin-bottom: 50px;
+    padding: 10px 20px;
+    background-color: #79bcbf;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
+

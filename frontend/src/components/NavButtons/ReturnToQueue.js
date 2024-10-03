@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const ReturnToQueue = () => {
     return (
-        <div>
-            <Link to="/">
+        <div className="navButtonContainer">
+            <Link to="/" className="navButton">
                 Back to the song queue
             </Link>
         </div>

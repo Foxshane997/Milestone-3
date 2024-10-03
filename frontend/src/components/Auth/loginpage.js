@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '../../styling/Login.css'
 
 const LoginPage = ({ setIsLoggedIn, setUser }) => {
     const [username, setUsername] = useState('');
@@ -24,7 +27,7 @@ const LoginPage = ({ setIsLoggedIn, setUser }) => {
             }
 
             const data = await response.json();
-            console.log("Login successful!", data); // Log the data
+            console.log("Login successful!", data);
 
             localStorage.setItem('token', data.token);
 
@@ -32,10 +35,13 @@ const LoginPage = ({ setIsLoggedIn, setUser }) => {
             setUser({
                 id: data.user.id,
                 username: data.user.username,
-                admin: data.user.admin, // Ensure this is correct
+                admin: data.user.admin,
             });
 
-            navigate('/'); // You may want to comment this out during testing to avoid automatic redirects
+            toast.success(`Welcome back, ${data.user.username}!`);
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
         } catch (err) {
             setError(err.message);
         }
@@ -65,7 +71,7 @@ const LoginPage = ({ setIsLoggedIn, setUser }) => {
                     />
                 </div>
                 <div>
-                    <button type="submit"> Login </button>
+                    <button type="submit" className="login-button"> Login </button>
                 </div>
             </form>
             <div>
@@ -74,6 +80,8 @@ const LoginPage = ({ setIsLoggedIn, setUser }) => {
                     <button> Register my boi </button>
                 </Link>
             </div>
+            {/* Toast Container */}
+            <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick pauseOnHover draggable />
         </div>
     );
 };
