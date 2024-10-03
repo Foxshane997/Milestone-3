@@ -53,19 +53,21 @@ const LoginPage = ({ setIsLoggedIn, setUser }) => {
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleLogin}>
                 <div>
-                    <label htmlFor="username"> Username: </label>
+                    <label htmlFor="username">  </label>
                     <input
                         type="text"
                         id="username"
+                        placeholder="USERNAME"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
                 </div>
                 <div>
-                    <label htmlFor="password"> Password: </label>
+                    <label htmlFor="password">  </label>
                     <input
                         type="password"
                         id="password"
+                        placeholder="PASSWORD"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
