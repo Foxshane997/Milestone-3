@@ -111,3 +111,6 @@ Please ensure that any further use of Spotify’s API complies with Spotify’s 
  ### What we would have liked
  - User Profile
  - Volume Controller
+ - Song Spam Control 
+ - Multi playlist for queues
+ - Admin Control overview 
