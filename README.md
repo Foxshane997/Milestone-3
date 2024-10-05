@@ -113,4 +113,6 @@ Please ensure that any further use of Spotify’s API complies with Spotify’s 
  - Volume Controller
  - Song Spam Control 
  - Multi playlist for queues
- - Admin Control overview 
+ - Admin Control overview
+ - Team info
+ - Github link
