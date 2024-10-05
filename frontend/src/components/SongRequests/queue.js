@@ -5,10 +5,9 @@ import '../../styling/queue.css';
 
 const Queue = () => {
     const [queue, setQueue] = useState([]);
-    const [songDetails, setSongDetails] = useState({}); // Store fetched song details
-    const [currentTrackUri, setCurrentTrackUri] = useState(null); // Track URI to embed
+    const [songDetails, setSongDetails] = useState({});
+    const [currentTrackUri, setCurrentTrackUri] = useState(null);
 
-    // Fetch queue data periodically
     useEffect(() => {
         const fetchQueue = async () => {
             try {
@@ -23,17 +22,16 @@ const Queue = () => {
 
     }, []);
 
-    // Fetch song details when the queue or songDetails changes
     useEffect(() => {
         const fetchAllSongDetails = async () => {
-            const songsToFetch = queue.filter(request => !songDetails[request.name]); // Only fetch details for songs we haven't fetched yet
+            const songsToFetch = queue.filter(request => !songDetails[request.name]);
 
             for (const request of songsToFetch) {
                 try {
                     const response = await axios.get(`https://milestone-3-production.up.railway.app/api/songs/track/${request.name}`);
                     setSongDetails(prevState => ({
                         ...prevState,
-                        [request.name]: response.data // Store song details by track ID (request.name)
+                        [request.name]: response.data
                     }));
                 } catch (error) {
                     console.error('Error fetching song details:', error);
@@ -46,17 +44,14 @@ const Queue = () => {
         }
     }, [queue, songDetails]);
 
-    // Handle track selection and display embedded Spotify player
     const handlePlayTrack = (trackId) => {
-        setCurrentTrackUri(trackId); // Set the selected track URI for embedding
+        setCurrentTrackUri(trackId);
     };
 
     return (
         <div>
             <ReturnToSongRequests />
             <h1>This is the song queue.</h1>
-
-            {/* Spotify Embed Player */}
             {currentTrackUri && (
                 <div style={{ marginBottom: '20px' }}>
                     <iframe

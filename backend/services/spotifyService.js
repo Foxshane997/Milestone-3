@@ -1,4 +1,3 @@
-// backend/services/spotifyService.js
 const axios = require('axios');
 require('dotenv').config();
 
@@ -30,14 +29,14 @@ const searchSong = async (query) => {
 };
 
 const getTrackById = async (trackId) => {
-    const token = await getAccessToken(); // Fetch the access token
+    const token = await getAccessToken();
     const response = await axios.get(`https://api.spotify.com/v1/tracks/${trackId}`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
     });
-    return response.data; // Return the track details
+    return response.data;
 };
 
-module.exports = { searchSong, getTrackById }; // Export the new function
+module.exports = { searchSong, getTrackById };
 

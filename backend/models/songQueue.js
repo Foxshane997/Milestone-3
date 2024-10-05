@@ -23,7 +23,6 @@ class Song {
         }
     }
 
-    // Method to clear all songs from the queue
     static async clearAllSongs() {
         try {
             await db.query('DELETE FROM song_queue');

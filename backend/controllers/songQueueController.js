@@ -12,7 +12,6 @@ const addSong = async (req, res) => {
     }
 };
 
-// Controller to get all songs
 const getAllSongs = async (req, res) => {
     try {
         const songs = await Song.getAllSongs();
@@ -23,11 +22,10 @@ const getAllSongs = async (req, res) => {
     }
 };
 
-// Controller to clear all songs in the queue
 const clearQueue = async (req, res) => {
     try {
-        await Song.clearAllSongs(); // Call to model method to clear songs
-        res.status(204).send(); // Send a no content response
+        await Song.clearAllSongs();
+        res.status(204).send();
     } catch (error) {
         console.error('Error clearing song queue:', error);
         res.status(500).json({ error: 'Internal Server Error' });

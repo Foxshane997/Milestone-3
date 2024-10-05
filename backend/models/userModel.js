@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const User = {
-    // Create a new user with a hashed password
     createUser: async (username, password, admin = false) => {
         try {
             const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -16,14 +15,12 @@ const User = {
         }
     },
 
-    // Retrieve all users from the database
     getAllUsers: async () => {
         const query = 'SELECT * FROM users';
         const result = await db.query(query);
         return result.rows;
     },
 
-    // Find a user by username
     findOne: async (username) => {
         const query = 'SELECT * FROM users WHERE username = $1';
         const result = await db.query(query, [username]);

@@ -1,13 +1,12 @@
 const express = require('express');
-const { searchSong, getTrackById } = require('../services/spotifyService'); // Import searchSong and getTrackById
+const { searchSong, getTrackById } = require('../services/spotifyService');
 
 const router = express.Router();
 
-// Existing search route
 router.get('/search', async (req, res) => {
     const { query } = req.query;
     try {
-        const results = await searchSong(query); // Use the imported searchSong function
+        const results = await searchSong(query);
         res.status(200).json(results);
     } catch (error) {
         console.error('Error searching for song:', error);
@@ -15,11 +14,10 @@ router.get('/search', async (req, res) => {
     }
 });
 
-// New route to get track details by ID
 router.get('/track/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const trackDetails = await getTrackById(id); // Call the new service function
+        const trackDetails = await getTrackById(id);
         res.status(200).json(trackDetails);
     } catch (error) {
         console.error('Error fetching track details:', error);

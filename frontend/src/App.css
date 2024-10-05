@@ -37,7 +37,7 @@ button:hover {
   background-color: #79bcbf;
   color: white;
   padding: 10px 20px;
-  border-radius: 25px; /* Increased to create pill shape */
+  border-radius: 25px;
   border: solid 3px white;
   text-align: center;
   text-decoration: none;

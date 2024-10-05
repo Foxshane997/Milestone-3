@@ -33,7 +33,6 @@ function App() {
             <div>
                 <Header user={user} handleLogout={handleLogout} />
                 <Routes>
-                    {/* Public Routes */}
                     <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/" element={<Queue />} />

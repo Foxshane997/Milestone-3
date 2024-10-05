@@ -43,7 +43,7 @@ const SongRequests = ({ user }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username: user.username, name: selectedSongId, requestTime: currentTime }), // Send track ID instead of name
+                body: JSON.stringify({ username: user.username, name: selectedSongId, requestTime: currentTime }),
             });
     
             if (response.ok) {
@@ -64,9 +64,6 @@ const SongRequests = ({ user }) => {
     return (
         <div>
             <ReturnToQueue/>
-            <h1>Song Request Page</h1>
-            
-            {/* Search Functionality */}
             <div>
                 <input
                     type="text"
@@ -77,8 +74,6 @@ const SongRequests = ({ user }) => {
                 />
                 <button type="button" onClick={handleSearch}>Search</button>
             </div>
-
-            {/* Display Search Results */}
             {results.length > 0 && (
                 <ul className="searchResults">
                     {results.map((track) => (
@@ -96,10 +91,8 @@ const SongRequests = ({ user }) => {
                 </ul>
             )}
 
-            {/* Error Message */}
             {error && <p style={{ color: 'red' }}>{error}</p>}
 
-            {/* Submit Song Request */}
             {selectedSongName && (
                 <form className="requestButton" onSubmit={handleSongRequest}>
                     <h3>Selected Song: {selectedSongName}</h3>
@@ -107,7 +100,6 @@ const SongRequests = ({ user }) => {
                 </form>
             )}
             
-            {/* Toast Container */}
             <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick pauseOnHover draggable />
         </div>
     );

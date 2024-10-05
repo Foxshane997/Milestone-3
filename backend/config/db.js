@@ -8,7 +8,6 @@ const pool = new Pool({
     }
 });
 
-// Optional: Test the connection
 pool.connect()
     .then(() => console.log('Database connected successfully'))
     .catch(err => console.error('Database connection error', err.stack));

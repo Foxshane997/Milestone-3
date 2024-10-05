@@ -1,6 +1,5 @@
 const User = require('../models/userModel');
 
-// Controller to handle user registration
 const createUser = async (req, res) => {
     const { username, password, admin } = req.body;
     try {
