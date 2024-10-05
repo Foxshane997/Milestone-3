@@ -86,3 +86,4 @@ Users can register and log in to submit songs that are added to a queue & listen
 ### Notes  
  ### What we would have liked
  - User Profile
+ - Volume Controller
